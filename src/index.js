@@ -3,9 +3,10 @@ const express = require("express");
 const cors = require("cors");
 const notificationEmail = require("../routes/notification-email");
 const bodyParser = require("body-parser");
+const { default: accessEnv } = require("./helpers/accessEnv");
 
 const app = express();
-const port = process.env.PORT || 4535;
+const port = accessEnv("PORT") || 4535;
 
 // Body Parser
 app.use(bodyParser.urlencoded({ extended: false }));

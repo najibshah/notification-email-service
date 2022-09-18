@@ -1,15 +1,16 @@
 const express = require("express");
 const router = express.Router();
+const { default: accessEnv } = require("../src/helpers/accessEnv");
 
 var Mailgun = require("mailgun-js");
 //API key for mailgun
-var apiKey = process.env.MAILGUN_API_KEY;
+var apiKey = accessEnv("MAILGUN_API_KEY");
 //Domain for mailgun
-var domainUrl = process.env.MAILGUN_DOMAIN_URL;
+var domainUrl = accessEnv("MAILGUN_DOMAIN_URL");
 //From-Who address for mailgun
-var fromWho = process.env.FROM_WHO;
+var fromWho = accessEnv("FROM_WHO");
 //Admin email address for mailgun
-var adminEmail = process.env.ADMIN_EMAIL;
+var adminEmail = accessEnv("ADMIN_EMAIL");
 
 // @route   GET /test
 // @desc    Tests notification email get route
