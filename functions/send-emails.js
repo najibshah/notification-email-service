@@ -1,6 +1,5 @@
 const { default: accessEnv } = require("../src/helpers/accessEnv");
 var Mailgun = require("mailgun-js");
-
 //API key for mailgun
 const apiKey = accessEnv("MAILGUN_API_KEY");
 //Domain for mailgun
@@ -15,9 +14,7 @@ export function sendEmails(req, res) {
   // Email data for user email
   const userMessageData = {
     from: fromWho,
-    // User email data
     to: req.body.mail,
-    // Subject and text data
     subject: "Greetings Earthling!",
     text:
       "Greetings " +
@@ -28,9 +25,7 @@ export function sendEmails(req, res) {
   // Email data for admin email
   const adminMessageData = {
     from: fromWho,
-    // Admin email data
     to: adminEmail,
-    // Subject and text data
     subject: "Greetings Admin!",
     text:
       "Hello Admin, There's been a new form submission to our database by " +
@@ -39,10 +34,10 @@ export function sendEmails(req, res) {
   };
 
   // Sends email to User
-  mailgun.messages().send(userMessageData, function (err, body) {
-    if (err) {
-      res.status(400).json(err);
-      console.log("got an error: ", err);
+  mailgun.messages().send(userMessageData, (error, body) => {
+    if (error) {
+      res.status(400).json(error);
+      console.log("error in mailgun user call: ", error);
     } else {
       res.status(200).json({ email: req.body.mail });
       console.log(body);
@@ -50,9 +45,9 @@ export function sendEmails(req, res) {
   });
 
   // Sends mail to Admin
-  mailgun.messages().send(adminMessageData, function (err, body) {
-    if (err) {
-      console.log("got an error: ", err);
+  mailgun.messages().send(adminMessageData, (error, body) => {
+    if (error) {
+      console.log("error in mailgun admin call: ", error);
     } else {
       console.log(body);
     }

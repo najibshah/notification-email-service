@@ -15,7 +15,7 @@ router.post("/test", (req, res) =>
 );
 
 // @route   POST /submit
-// @desc    Send a message to the specified email address
+// @desc    Send a message to the specified email addresses
 // @access  Public
 router.post("/submit/", (req, res) => sendEmails(req, res));
 
